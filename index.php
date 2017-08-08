@@ -21,7 +21,7 @@ echo "";
 <head>
 <body>
 
-<form action="hoo.php" method="post" >
+<form method="post" >
 
 
 stid: <input type ="text" name ="stid" placeholder="Enter your SID" value= "<?php
@@ -91,12 +91,8 @@ echo "</br>";
 ?>
 
 
-mobile number : <input type ="text" name ="mobilenumber" placeholder="Enter your mobile number" value=
-"<?php
-if(isset($_POST['mobilenumber']))
-  echo $_POST['mobilenumber'];
-
-?>">
+mobile number :
+<input type ="text" name ="mobilenumber" placeholder="Enter your mobile number" value="<?php echo (isset($_POST['mobilenumber']))?$_POST['mobilenumber']:'';?>">
 </br>
 
 <?php
