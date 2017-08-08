@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
 $username = "root";
-$password = "12345";
+$password = "123456";
 $dbname="db";
 $table="student";
 $valid_submit = true;
@@ -24,12 +24,11 @@ echo "";
 <form action="hoo.php" method="post" >
 
 
-stid: <input type ="text" name ="stid" placeholder="Enter your SID"
+stid: <input type ="text" name ="stid" placeholder="Enter your SID" value= "<?php
+if(isset($_POST['stid']))
+echo $_POST['stid'] ;
 
-value="<?php
-echo $_POST['stid'];
-
-?>" >
+?>">
 </br>
 <?php
 if(isset($_POST['stid']) && $_POST['stid']==='')
@@ -50,9 +49,9 @@ echo "</br>";
 
 first name : <input type ="text" name ="fname" placeholder="Enter your First name" value=
 "<?php
+if(isset($_POST['fname']))
   echo $_POST['fname'];
 ?>">
-</br>
 </br>
 
 <?php
@@ -71,6 +70,7 @@ echo "</br>";
 
 secound name : <input type ="text" name ="sname" placeholder="Enter your secound name" value=
 "<?php
+if(isset($_POST['sname']) )
 echo $_POST['sname'];
  ?>">
 
@@ -93,9 +93,10 @@ echo "</br>";
 
 mobile number : <input type ="text" name ="mobilenumber" placeholder="Enter your mobile number" value=
 "<?php
+if(isset($_POST['mobilenumber']))
   echo $_POST['mobilenumber'];
 
-?> ">
+?>">
 </br>
 
 <?php
@@ -116,6 +117,7 @@ echo "</br>";
 
 age : <input type ="text" name ="nage" placeholder="Enter your SID" value=
 "<?php
+if(isset($_POST['nage']))
   echo $_POST['nage'];
 ?>">
 </br>
