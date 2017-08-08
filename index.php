@@ -130,6 +130,22 @@ echo "</br>";
   $age = $_POST['nage'];
 }
 ?>
+</br>
+<Input type = 'Radio' Name ='male' value="male">Male
+<Input type = 'Radio' Name ='female' value="female">female
+<?php
+if (isset($_POST['male']))
+$male=$_POST['male'];
+else {
+$male="0";
+}
+if (isset($_POST['female']))
+$female=$_POST['female'];
+else {
+  $female="0";
+}
+ ?>
+
 
 </br>
 <input type="submit" name = "sub" >
@@ -140,19 +156,17 @@ echo "</br>";
 if($valid_submit && isset($_POST) && $valid_numric && $valid_found)
 {
 $valid_keep=true;
-  $sql = "INSERT INTO student(stid,first_name, secound_name, mobile_number, age) VALUES ('$stid','$fname','$sname','$mobile','$age')";
+  $sql = "INSERT INTO student(stid,first_name, secound_name, mobile_number, age, mgender, fgender) VALUES ('$stid','$fname','$sname','$mobile','$age','$male','$female')";
 
   if ($conn->query($sql) === TRUE){
       echo "success";
    }else{
      echo "</br>";
-      echo ' <font size="1" color="red" > *The student id must be uniqe, please enter another studnt id </font> ';
-
+     echo "Error: " . $sql . "<br>" . $conn->error;
   }
 }  elseif(isset($_POST)) {
     echo "</br>";
 }
-
 $conn->close();
 ?>
 
