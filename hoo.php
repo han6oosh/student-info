@@ -22,22 +22,8 @@ echo "";
 <body>
 
 <form action="hoo.php" method="post" >
->
-id: <input type ="text" name ="id" placeholder="Enter your ID">
 
-</br>
-</br>
-<?php
-if(isset($_POST['id']))
-{
-  $valid_found=true;
-    $id = $_POST['id'];
-  }
-    else
-    {
-      echo "";
-    }
-?>
+
 stid: <input type ="text" name ="stid" placeholder="Enter your SID"
 
 value="<?php
