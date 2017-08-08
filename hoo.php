@@ -17,9 +17,6 @@ if ($conn->connect_error) {
 }
 echo "";
 ?>
-
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -71,6 +68,7 @@ first name : <input type ="text" name ="fname" placeholder="Enter your First nam
 "<?php
   echo $_POST['fname'];
 ?>">
+</br>
 </br>
 
 <?php
