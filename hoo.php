@@ -11,7 +11,6 @@ $valid_keep=true;
 $valid_check=false;
 $conn = new mysqli($servername, $username, $password,$dbname);
 
-
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
@@ -62,7 +61,6 @@ echo "</br>";
   $stid = $_POST['stid'];
 }
  ?>
-
 
 first name : <input type ="text" name ="fname" placeholder="Enter your First name" value=
 "<?php
@@ -170,8 +168,6 @@ $valid_keep=true;
 }  elseif(isset($_POST)) {
     echo "</br>";
 }
-
-
 
 $conn->close();
 ?>
