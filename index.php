@@ -156,7 +156,7 @@ else {
 if($valid_submit && isset($_POST) && $valid_numric && $valid_found)
 {
 $valid_keep=true;
-  $sql = "INSERT INTO student(stid,first_name, secound_name, mobile_number, age, mgender, fgender) VALUES ('$stid','$fname','$sname','$mobile','$age','$male','$female')";
+  $sql = "INSERT INTO student(stid,first_name, secound_name, mobile_number, age, male_gender, female_gender) VALUES ('$stid','$fname','$sname','$mobile','$age','$male','$female')";
 
   if ($conn->query($sql) === TRUE){
       echo "success";
@@ -167,8 +167,10 @@ $valid_keep=true;
 }  elseif(isset($_POST)) {
     echo "</br>";
 }
-$conn->close();
+
+     $conn->close();
 ?>
+
 
 </body>
 </head>
