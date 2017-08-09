@@ -5,7 +5,7 @@
     <?php
     $servername="localhost";
     $username="root";
-    $password="123456";
+    $password="12345";
     $db="db";
 
     $link = mysqli_connect($servername,$username,$password,$db);
@@ -40,6 +40,7 @@ while($row = mysqli_fetch_row($result))
      }
     echo "</tr>\n";
   }
+
 ?>
 </body>
 </head>

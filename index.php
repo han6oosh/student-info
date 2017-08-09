@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
 $username = "root";
-$password = "123456";
+$password = "12345";
 $dbname="db";
 $table="student";
 $valid_submit = true;
