@@ -16,79 +16,44 @@ if (!$link) {
 echo "Success " . PHP_EOL;
 
 ?>
+
 <?php
-if (isset($_POST['sub'])) {
-    echo "";
-} else {
-    $query = "SELECT * FROM student LIMIT 5";
-    if (!$query)
-        echo "e";
-    $result = $link->query($query);
-    $field_count = mysqli_field_count($link);
-    echo "<table border='1'><tr>";
-    for ($i = 0; $i < $field_count; $i++) {
-        $field = mysqli_fetch_field($result);
-        echo "<td>{$field->name}</td>";
-    }
-    echo "</tr>\n";
-    while ($row = mysqli_fetch_row($result)) {
-        echo "<tr>";
-        foreach ($row as $cell) {
-            echo "<td>$cell</td>";
-        }
-        echo "</tr>\n";
-    }
-}
+$query2="SELECT * FROM student";
+$result2 = $link->query($query2);
+$row_cnt = mysqli_num_rows($result2);
+echo $row_cnt;
+
+
 ?>
 
 <?php
-if (isset($_POST['sub'])) {
-    $count++;
-    $query5 = "SELECT * FROM student LIMIT 5 OFFSET 5";
-    if (!$query5)
-        echo "e";
-    $result5 = $link->query($query5);
-    $field_count5 = mysqli_field_count($link);
-    echo "<table border='1'><tr>";
-    for ($i = 0; $i < $field_count5; $i++) {
-        $field5 = mysqli_fetch_field($result5);
-        echo "<td>{$field5->name}</td>";
-    }
-    echo "</tr>\n";
-    while ($row5 = mysqli_fetch_row($result5)) {
-        echo "<tr>";
-        foreach ($row5 as $cell5) {
-            echo "<td>$cell5</td>";
+if (isset($_POST['sub']))
+for($J=0;$J<$row_cnt;$J++) {
+
+        $query = "SELECT * FROM student LIMIT 5";
+
+        $result = $link->query($query);
+        $field_count = mysqli_field_count($link);
+        echo "<table border='1'><tr>";
+        for ($i = 0; $i < $field_count; $i++) {
+            $field = mysqli_fetch_field($result);
+            echo "<td>{$field->name}</td>";
         }
         echo "</tr>\n";
-    }
-}
-
-?>
-<?php
-
-if (isset($_POST['sub'])) {
-    $query10 = "SELECT * FROM student LIMIT 10 OFFSET 5";
-    if (!$query10)
-        echo "e";
-    $result10 = $link->query($query10);
-    $field_count10 = mysqli_field_count($link);
-    echo "<table border='1'><tr>";
-    for ($i = 0; $i < $field_count10; $i++) {
-        $field10 = mysqli_fetch_field($result10);
-        echo "<td>{$field10->name}</td>";
-    }
-    echo "</tr>\n";
-    while ($row10 = mysqli_fetch_row($result10)) {
-        echo "<tr>";
-        foreach ($row10 as $cell10) {
-            echo "<td>$cell10</td>";
+        while ($row = mysqli_fetch_row($result)) {
+            echo "<tr>";
+            foreach ($row as $cell) {
+                echo "<td>$cell</td>";
+            }
+            echo "</tr>\n";
         }
-        echo "</tr>\n";
-
-    }
 }
+$link->close();
 ?>
+
+
+
+
 <form action="first5.php" method="post">
     <input type="submit" name="sub" value="next 5 row">
 </body>
