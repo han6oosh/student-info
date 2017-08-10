@@ -3,12 +3,12 @@
 <head>
 <body>
 <?php
-$servername="localhost";
-$username="root";
-$password="12345";
-$db="db";
-$count=0;
-$link = mysqli_connect($servername,$username,$password,$db);
+$servername = "localhost";
+$username = "root";
+$password = "12345";
+$db = "db";
+$count = 0;
+$link = mysqli_connect($servername, $username, $password, $db);
 
 if (!$link) {
     echo "Error: Unable to connect to MySQL." . PHP_EOL;
@@ -17,11 +17,9 @@ echo "Success " . PHP_EOL;
 
 ?>
 <?php
-if(isset($_POST['sub']))
-{
+if (isset($_POST['sub'])) {
     echo "";
-}
-else {
+} else {
     $query = "SELECT * FROM student LIMIT 5";
     if (!$query)
         echo "e";
@@ -44,7 +42,7 @@ else {
 ?>
 
 <?php
-if(isset($_POST['sub'])) {
+if (isset($_POST['sub'])) {
     $count++;
     $query5 = "SELECT * FROM student LIMIT 5 OFFSET 5";
     if (!$query5)
@@ -69,24 +67,24 @@ if(isset($_POST['sub'])) {
 ?>
 <?php
 
-if(isset($_POST['sub'])) {
-        $query10 = "SELECT * FROM student LIMIT 10 OFFSET 5";
-        if (!$query10)
-            echo "e";
-        $result10 = $link->query($query10);
-        $field_count10 = mysqli_field_count($link);
-        echo "<table border='1'><tr>";
-        for ($i = 0; $i < $field_count10; $i++) {
-            $field10 = mysqli_fetch_field($result10);
-            echo "<td>{$field10->name}</td>";
+if (isset($_POST['sub'])) {
+    $query10 = "SELECT * FROM student LIMIT 10 OFFSET 5";
+    if (!$query10)
+        echo "e";
+    $result10 = $link->query($query10);
+    $field_count10 = mysqli_field_count($link);
+    echo "<table border='1'><tr>";
+    for ($i = 0; $i < $field_count10; $i++) {
+        $field10 = mysqli_fetch_field($result10);
+        echo "<td>{$field10->name}</td>";
+    }
+    echo "</tr>\n";
+    while ($row10 = mysqli_fetch_row($result10)) {
+        echo "<tr>";
+        foreach ($row10 as $cell10) {
+            echo "<td>$cell10</td>";
         }
         echo "</tr>\n";
-        while ($row10 = mysqli_fetch_row($result10)) {
-            echo "<tr>";
-            foreach ($row10 as $cell10) {
-                echo "<td>$cell10</td>";
-            }
-            echo "</tr>\n";
 
     }
 }
