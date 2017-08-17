@@ -1,156 +1,126 @@
 <?php
+
 $servername = "localhost";
 $username = "root";
 $password = "12345";
-$dbname = "db";
-$table = "student";
-$valid_submit = true;
-$valid_numric = true;
-$valid_found = false;
-$valid_keep = true;
-$valid_check = false;
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+$db = "db";
+$link = mysqli_connect($servername, $username, $password, $db);
+if (!$link) {
+    echo "Error: Unable to connect to MySQL." . PHP_EOL;
 }
-echo "";
+echo "" . PHP_EOL;
 ?>
+
 <!DOCTYPE html>
-<html>
-<head>
-<body>
 
-<form method="post">
+<br>
+<input type="search" name="ss" placeholder="search throgh first name" onclick="">
+<input type="submit" name="sear" value="search">
 
+<table>
 
-    stid: <input type="text" name="stid" placeholder="Enter your SID" value="<?php
-    if (isset($_POST['stid']))
-        echo $_POST['stid'];
-
-    ?>">
-    </br>
-    <?php
-    if (isset($_POST['stid']) && $_POST['stid'] === '') {
-
-        echo '<font size="2" color="red"> *the student id is required </font> ';
-        echo "</br>";
-    } elseif (isset($_POST['stid']) && !is_numeric($_POST['stid'])) {
-        $valid_numric = false;
-        echo '<font size="2" color="red"> *the student id must be number </font> ';
-        echo "</br>";
-    } elseif (isset($_POST['stid'])) {
-        $stid = $_POST['stid'];
-    }
-    ?>
-
-    first name : <input type="text" name="fname" placeholder="Enter your First name" value=
-    "<?php
-    if (isset($_POST['fname']))
-        echo $_POST['fname'];
-    ?>">
-    </br>
 
     <?php
-    if (isset($_POST['fname'])) {
-        $valid_found = true;
-        $fname = $_POST['fname'];
-        $fname = mysqli_real_escape_string($conn, $fname);
-        if ($fname == "") {
-            $valid_submit = false;
-            echo '<font size="2" color="red"> *the first name is required </font> ';
-            echo "</br>";
-        }
-    }
-    ?>
-
-
-    secound name : <input type="text" name="sname" placeholder="Enter your secound name" value=
-    "<?php
-    if (isset($_POST['sname']))
-        echo $_POST['sname'];
-    ?>">
-
-
-    </br>
-
-    <?php
-    if (isset($_POST['sname'])) {
-        $valid_found = true;
-        $sname = $_POST['sname'];
-        $sname = mysqli_real_escape_string($conn, $sname);
-        if ($sname == "") {
-            $valid_submit = false;
-            echo '<font size="2" color="red"> *the secound name is required </font> ';
-            echo "</br>";
-        }
-    }
-    ?>
-
-
-    mobile number :
-    <input type="text" name="mobilenumber" placeholder="Enter your mobile number"
-           value="<?php echo (isset($_POST['mobilenumber'])) ? $_POST['mobilenumber'] : ''; ?>">
-    </br>
-
-    <?php
-    if (isset($_POST['mobilenumber']) && $_POST['mobilenumber'] === '') {
-        echo '<font size="2" color="red"> *the mobile number is required </font> ';
-        echo "</br>";
-    } elseif (isset($_POST['mobilenumber']) && !is_numeric($_POST['mobilenumber'])) {
-        $valid_numric = false;
-        echo '<font size="2" color="red"> *the  mobile number must be number </font> ';
-        echo "</br>";
-    } elseif (isset($_POST['mobilenumber'])) {
-        $mobile = $_POST['mobilenumber'];
-    }
-    ?>
-
-
-    age : <input type="text" name="nage" placeholder="Enter your SID" value=
-    "<?php
-    if (isset($_POST['nage']))
-        echo $_POST['nage'];
-    ?>">
-    </br>
-    <?php
-    if (isset($_POST['nage']) && $_POST['nage'] === '') {
-        echo '<font size="2" color="red"> *the age is required </font> ';
-    } elseif (isset($_POST['nage']) && !is_numeric($_POST['nage'])) {
-        $valid_numric = false;
-        echo '<font size="2" color="red"> *the age must be number </font> ';
-        echo "</br>";
-    } elseif (isset($_POST['nage'])) {
-        $age = $_POST['nage'];
-
-    }
-    ?>
-    </br>
-
-
-    </br>
-    <input type="submit" name="sub">
-</form>
-<?php
-
-
-if ($valid_submit && isset($_POST) && $valid_numric && $valid_found) {
-    $valid_keep = true;
-    $sql = "INSERT INTO student(stid,first_name, secound_name, mobile_number, age) VALUES ('$stid','$fname','$sname','$mobile','$age')";
-
-    if ($conn->query($sql) === TRUE) {
-        echo "";
+    if (isset($_GET['page']))  {
+        $current_page = $_GET['page'];
     } else {
-        echo "</br>";
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        $current_page = 1;
     }
-} elseif (isset($_POST)) {
-    echo "</br>";
-}
+    if (!isset($_POST['sear'])) {
+        $previous_page = $current_page - 1;
+        $next_page = $current_page + 1;
+        $per_page = 5;
+        $start_page = ($current_page - 1) * $per_page;
 
-$conn->close();
-?>
-<a href="print.php"> to students information </a>
+        $query = "SELECT * FROM student LIMIT $start_page ,  $per_page";
+        $rows_result = $link->query("SELECT count(*) as rows FROM student");
+        $rows = mysqli_fetch_assoc($rows_result);
+        $total_row = $rows['rows'];
+        $last_page = ceil($total_row / $per_page);
+        if (!$query)
+            echo "e";
+        $result = $link->query($query);
+        $field_count = mysqli_field_count($link);
+        echo "<table id='table' border='1'><tr>";
+        for ($i = 0; $i < $field_count; $i++) {
+            $field = mysqli_fetch_field($result);
+            echo "<td> {$field->name}</td>";
+
+        }
+        echo "</tr>\n";
+        $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
+        foreach ($row as $data) {
+            echo "<tr>";
+            echo "<td> <a href='update.php?id={$data['id']}' name = 'link1'> {$data['id']} </a> </td>";
+            echo "<td>{$data['stid']}</td>";
+            echo "<td>{$data['first_name']}</td>";
+            echo "<td>{$data['secound_name']}</td>";
+            echo "<td>{$data['mobile_number']}</td>";
+            echo "<td>{$data['age']}</td>";
+            echo "<td> <a href='delete.php?id={$data['id']}' onclick='if(confirm(\"are you sure?\")){ return true }else{ return false;}'>Delete</a> </td>";
+            echo "<td> <a href='index.php?id={$data['id']}' name='veiw'  >veiw</a> </td>";
+
+            echo "</tr>";
+        }
+    }
+    elseif (isset($_POST['sear']))
+    {
+
+    }
+    ?>
+
+
+    <?php
+    if (isset($_GET['id'])) {
+        $id = $_GET['id'];
+        $sql_q = "select * from student WHERE id=$id";
+        $results = $link->query($sql_q);
+        while ($rowx = mysqli_fetch_row($results)) {
+
+            echo "<table border='1'>";
+            echo "</br>";
+            echo "<tr>";
+            echo "<td>{$rowx['0']}</td>";
+            echo "<td>{$rowx['1']}</td>";
+            echo "<td>{$rowx['2']}</td>";
+            echo "<td>{$rowx['3']}</td>";
+            echo "<td>{$rowx['4']}</td>";
+            echo "</tr>";
+            echo "</table>";
+        }
+    }
+    ?>
+
+    <div>
+        <a href="?page=1"> first </a> |
+
+        <?php
+        if ($current_page == 1)
+            echo "prev";
+        else
+            echo '<a href= "?page=' . $previous_page . '"> prev </a>';
+
+        ?>
+        |
+
+        <?php
+
+        if ($current_page == $last_page)
+            echo "next";
+        else
+            echo '<a href= "?page=' . $next_page . '"> next </a>';
+
+        ?>
+
+        <a href="?page=<?php echo $last_page ?>"> last </a> |
+
+    </div>
+</table>
+<a href="create.php"> student info form</a>
+</br>
+</br>
+<a href="create.php">add new student </a>
+</br>
 
 </body>
 </head>
