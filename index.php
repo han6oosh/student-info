@@ -65,7 +65,7 @@ echo "" . PHP_EOL;
     }
     elseif (isset($_POST['sear']))
     {
-
+echo "hi";
     }
     ?>
 

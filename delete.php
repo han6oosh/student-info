@@ -6,13 +6,13 @@
 
 <?php
 
-include 'print.php';
+include 'index.php';
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
     $sql_q = "delete from student WHERE id='$id'";
     $result = $link->query($sql_q);
     if ($result) {
-        header("location: print.php");
+        header("location: index.php");
 
     }
 }
