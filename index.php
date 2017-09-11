@@ -266,7 +266,6 @@
                    $("#responsecontainer").html(data);
 
                 }
-
             });
             return false;
         })
