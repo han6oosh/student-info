@@ -1,0 +1,11 @@
+#rowv{
+    border-spacing: 0.5rem;
+    border-collapse: collapse;
+    position: absolute ;
+    bottom:70px;
+    /*right: 0;*/
+    /*width: 300px;*/
+    border: 3px solid darkslateblue;
+
+
+}

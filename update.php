@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="updateS.css">
+</head>
 <body>
 <?php
 
@@ -16,7 +18,9 @@ echo " " . PHP_EOL;
 ?>
 
 <form method="post">
-    student number <input type="text" name="stid" value=" <?php
+    <div id="update">
+        <h3> this form for update student information </h3>
+    <label> student number </label> <input type="text" name="stid" value=" <?php
     if (isset($_GET['id'])) {
         $id = $_GET['id'];
         $sqq = "select * from student WHERE id = $id";
@@ -27,7 +31,7 @@ echo " " . PHP_EOL;
     ?>">
 
     </br>
-    first name <input type="text" name="first_name" value="<?php
+   <label>first name </label> <input type="text" name="first_name" value="<?php
     if (isset($_POST['sub']))
     {
     $new_first_name=$_POST['first_name'];
@@ -45,7 +49,7 @@ echo " " . PHP_EOL;
     ?>">
 
     </br>
-    secound name <input type="text" name="secound_name" value="<?php
+    <label>secound name</label> <input type="text" name="secound_name" value="<?php
 
     if (isset($_POST['sub']))
     {
@@ -61,7 +65,7 @@ echo " " . PHP_EOL;
     }
     ?>">
     </br>
-    mobile number <input type="text" name="mobile_number" value="<?php
+   <label>mobile number</label>  <input type="text" name="mobile_number" value="<?php
 
     if (isset($_POST['sub']))
     {
@@ -77,7 +81,7 @@ echo " " . PHP_EOL;
     }
     ?>">
     </br>
-    age <input type="text" name="age" value="<?php
+    <label>age</label>  <input type="text" name="age" value="<?php
     if (isset($_POST['sub']))
     {
         $new_age=$_POST['age'];
@@ -94,6 +98,7 @@ echo " " . PHP_EOL;
 
 
     <input type="submit" name="sub" value="update">
+  </div>
     <?php
 
     if (isset($_POST['sub'])) {
@@ -109,11 +114,12 @@ echo " " . PHP_EOL;
             echo "error , the student number exist";
         } else {
             echo "</br>";
-            echo "updating successfuly";
+            echo "<label id='succ'>updating successfuly</label>";
         }
 
 
     }
+
 
     ?>
 
@@ -122,5 +128,5 @@ echo " " . PHP_EOL;
 
 
 </body>
-</head>
+
 </html>

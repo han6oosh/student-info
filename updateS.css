@@ -1,0 +1,35 @@
+body{
+    background-color: #a999bc;
+}
+input[type="text"]{
+    margin-top:10px;
+    width:150px;
+    height:24px;
+    border:0px;
+}
+label{
+        text-align: center;
+    display:block;
+    float:left;
+    width:100px;
+    margin-top:10px;
+    text-transform:capitalize;
+
+
+
+}
+#update{
+    width:250px;
+    margin:0 auto;
+    background-color: #e1d2da;
+    padding:20px;
+    font-family:"Times New Roman", Times, serif;
+    font-size:10px;
+    text-transform:capitalize;
+    color:#333;
+    float: left;
+}
+h3{
+    text-align: center;
+    text-transform: capitalize;
+}
